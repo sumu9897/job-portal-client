@@ -35,7 +35,7 @@ const AddJob = () => {
                                     showConfirmButton: false,
                                     timer: 1500
                                   });
-                                navigate('/myApplications')
+                                navigate('/myPostedJobs')
                             }
         })
     }
@@ -55,15 +55,22 @@ const AddJob = () => {
                     <label className="label">
                         <span className="label-text">Job Location</span>
                     </label>
-                    <input type='text' name="location" placeholder="location" className="input input-bordered" required />
+                    <input type='text' name="location" placeholder="Job Location" className="input input-bordered" required />
+                </div>
+                {/* Application DeadLine */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Job Location</span>
+                    </label>
+                    <input type='date' name="applicationDeadline" placeholder="Application Deadline" className="input input-bordered" required />
                 </div>
                 {/* Job Type */}
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Job Type</span>
                     </label>
-                    <select defaultValue="Pick a job type" className="select select-ghost w-full max-w-xs">
-                        <option disabled></option>
+                    <select defaultValue="Pick a job type" className="select select-ghost w-full border">
+                        <option disabled>Pick a job type</option>
                         <option>Full-Time</option>
                         <option>Intern</option>
                         <option>Part-Time</option>
@@ -74,7 +81,7 @@ const AddJob = () => {
                     <label className="label">
                         <span className="label-text">Job Field</span>
                     </label>
-                    <select defaultValue="Pick a job Field" className="select select-ghost w-full max-w-xs">
+                    <select defaultValue="Pick a job Field" className="select select-ghost w-full bordered outline-1">
                         <option disabled>Pick a job Field</option>
                         <option>Engineering</option>
                         <option>Marketing</option>
