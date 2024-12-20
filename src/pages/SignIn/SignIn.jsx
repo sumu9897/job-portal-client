@@ -3,15 +3,16 @@ import React, { useContext } from 'react'
 import loginLottie from '../../assets/lottie/login.json'
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignIn = () => {
 
-    const {signInUser} = useContext(AuthContext);
+    const { signInUser } = useContext(AuthContext);
     const location = useLocation()
     const navigate = useNavigate();
     console.log('in signIn page', location)
     const from = location.state || '/';
-    
+
     const handleSignIn = e => {
         e.preventDefault();
         const form = e.target;
@@ -20,18 +21,23 @@ const SignIn = () => {
         console.log(email, password);
 
         signInUser(email, password)
-        .then(result => {
-            console.log('sign in', result.user)
-            navigate(from)
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(result => {
+                console.log('sign in', result.user.email)
+                const user = { email: email }
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                    })
+                // navigate(from)
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
 
-  return (
-    <div className="hero bg-base-200 min-h-screen">
+    return (
+        <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left w-96">
 
@@ -62,7 +68,7 @@ const SignIn = () => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default SignIn
